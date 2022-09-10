@@ -1,6 +1,6 @@
 # Audioswitch
 
-Audioswitch is a [Hammerspoon[(https://www.hammerspoon.org) that allows you to change input/output devices on the fly with simple global hotkeys.
+Audioswitch is a [Hammerspoon](https://www.hammerspoon.org) that allows you to change input/output devices on the fly with simple global hotkeys.
 
 ## Installation
 
