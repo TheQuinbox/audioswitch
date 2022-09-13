@@ -3,7 +3,7 @@ local inspect = hs.inspect
 local Audioswitch = {}
 
 Audioswitch.name = "Audioswitch"
-Audioswitch.version = "1.0"
+Audioswitch.version = "1.1"
 Audioswitch.author = "Quin Marilyn <quin.marilyn05@gmail.com>"
 Audioswitch.license = "MIT"
 Audioswitch.homepage = "https://www.github.com/TheQuinbox/Audioswitch"
@@ -90,10 +90,23 @@ local function nextInput()
 	speak(inputDevices[index + 1]:name())
 end
 
+local function muteInputDevice()
+	local device = hs.audiodevice.defaultInputDevice()
+	local muted = device:muted()
+	if muted then
+		device:setInputMuted(false)
+		speak("Unmuted")
+	else
+		device:setInputMuted(true)
+		speak("Muted")
+	end
+end
+
 local prevOutputHotkey = hs.hotkey.new("ctrl-shift", "[", prevOutput)
 local nextOutputHotkey = hs.hotkey.new("ctrl-shift", "]", nextOutput)
 local prevInputHotkey = hs.hotkey.new("ctrl-cmd-shift", "[", prevInput)
 local nextInputHotkey = hs.hotkey.new("ctrl-cmd-shift", "]", nextInput)
+local muteInputHotkey = hs.hotkey.new("ctrl-shift", "m", muteInputDevice)
 
 function Audioswitch.init()
 end
@@ -103,6 +116,7 @@ function Audioswitch.start()
 	nextOutputHotkey:enable()
 	prevInputHotkey:enable()
 	nextInputHotkey:enable()
+	muteInputHotkey:enable()
 end
 
 function Audioswitch.stop()
@@ -110,6 +124,7 @@ function Audioswitch.stop()
 	nextOutputHotkey:disable()
 	prevInputHotkey:disable()
 	nextInputHotkey:disable()
+	muteInputHotkey:disable()
 end
 
 return Audioswitch
