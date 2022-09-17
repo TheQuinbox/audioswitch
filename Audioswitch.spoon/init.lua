@@ -3,22 +3,20 @@ local inspect = hs.inspect
 local Audioswitch = {}
 
 Audioswitch.name = "Audioswitch"
-Audioswitch.version = "1.1"
+Audioswitch.version = "1.2"
 Audioswitch.author = "Quin Marilyn <quin.marilyn05@gmail.com>"
 Audioswitch.license = "MIT"
 Audioswitch.homepage = "https://www.github.com/TheQuinbox/Audioswitch"
 
-local speakScript = [[
-tell application "voiceover" to output "MESSAGE"
-]]
+local synth = hs.speech.new()
 
 local function speak(text)
-    local script = speakScript:gsub("MESSAGE", function()
-        return text
-    end)
-    success, _, output = hs.osascript.applescript(script)
-    if not success then
-        print(inspect(output))
+    if hs.application.get("VoiceOver") ~= nil then
+        hs.osascript.applescript(
+            "tell application \"VoiceOver\" to output \"" .. text .. "\""
+        )
+    else
+        synth:speak(text)
     end
 end
 
