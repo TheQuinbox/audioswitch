@@ -32,6 +32,8 @@ Save the file, return to the Hammerspoon menu extra but this time click the relo
 | Control+Command+Shift+[ | Cycle back an input device |
 | Control+Command+Shift+] | Cycle forward an input device |
 | Control+Shift+M | Toggle the muted state of your input device |
+| Control+Shift+L | List all available output devices |
+| Control+Command+Shift+L | List all available input devices |
 
 ## Contributing
 
